@@ -1,0 +1,13 @@
+git config --global user.name "italomtlindo"
+git config --global user.email "italomozersousa@gmail.com"
+
+//clonar repositório 
+git clone https://github.com/italomtlindo/SENAI-DES.git
+
+//Atualizar repositório WEB
+git add .  (adiciona as alterações feitas)
+git commit -m "comentario"  (valida as alterações feitas)
+git push  (envia as alterações) 
+
+//Atualizar repositório local
+git pull
