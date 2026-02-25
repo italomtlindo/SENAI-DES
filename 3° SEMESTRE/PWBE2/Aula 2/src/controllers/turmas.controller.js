@@ -42,7 +42,12 @@ const apagarTurma = async (req, res) => {
 const atualizarTurma = async (req, res) => {
     const { id } = req.params;
     const dados = req.body;
+<<<<<<< HEAD
      const turma = await prisma.turmas.update({
+=======
+
+    const turma = await prisma.turmas.update({
+>>>>>>> 918e10db34b8f37be2eae3ba6c544a28da6fa1b2
         where: { id },
         data: dados
     });
