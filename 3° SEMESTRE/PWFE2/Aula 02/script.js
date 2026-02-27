@@ -1,78 +1,51 @@
-let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
-
-document.addEventListener("DOMContentLoaded",renderizarTabela);
-
 function abrirModal(){
-    document.getElementById("modal").style.display = "block";
+    modalCli.style.display = "block";
 }
 
 function fecharModal(){
-    document.getElementById("modal").style.display = "none";
-    limparCampos();
+    modalCli.style.display = "none";
 }
 
-function salvarCliente(){
-    const cpf = document.getElementById("cpf").value.trim();
-    const nome = document.getElementById("nome").value.trim();
-    const sobrenome = document.getElementById("sobrenome").value.trim();
-    const nascimento = document.getElementById("nascimento").value;
+const modalCli = document.getElementById("modalCli");
+var clientes = JSON.parse(localStorage.getItem("clientes")) || [];
 
-    if(!cpf|| !nome) {
-        alert("CPF e nome são obrigatorios");
-        return;
-    }
-    const existe = clientes.find
-    (cliente =>cliente.cpf === cpf);
+renderizarTabela();
 
-    if (existe) {
-        alert("CPF ja cadastrado!");
-        return;
-    }
-
-    const novoCliente = {
-        id: Date.now(),
-        cpf,
-        nome,
-        sobrenome,
-        nascimento
-    };
-    clientes.push(novoCliente);
-    atualizarLocalStore();
-    renderizarTabela();
-    fecharModal();
+function salvarLocal(){
+    localStorage.setItem("clientes", JSON.stringify(clientes));
+    window.location.reload();
 }
 
-function renderizarTabela() {
-    const tabela = document.getElementById("dados");
-    tabela.innerHTML = "";
+const formCli = document.querySelector("#formCli");
+formCli.addEventListener("submit", e => {
+    e.preventDefault();
+    const obj = {
+        cpf : formCli.cpf.value,
+        nome: formCli.nome.value,
+        sobrenome: formCli.sobrenome.value,
+        nascimento: formCli.nascimento.value
+    }
+    clientes.push(obj);
+    salvarLocal();
+})
 
-    clientes.forEach(cliente =>{
-        tabela.innerHTML += `
+function renderizarTabela(){
+    const corpo = document.querySelector("#dados");
+    corpo.innerHTML = "";
+    clientes.forEach((c, i)=>{
+        corpo.innerHTML += `
         <tr>
-            <td>${cliente.cpf}</td>
-            <td>${cliente.nome}</td>
-            <td>${cliente.sobrenome}</td>
-            <td>${cliente.nascimento}</td>
-            <td>
-            <button onclick="excluirCliente(${cliente.id})">Excluir</button>
-            </td>
-            </tr>
-            `;
-    });
-
-};
-function excluirCliente(id){
-    if(!confirm("deseja realmente excluir?")) return;
-
-    clientes = clientes.filter(cliente => cliente.id !== id)
-    atualizarLocalStore();func
+            <td>${c.cpf}</td>
+            <td>${c.nome}</td>
+            <td>${c.sobrenome}</td>
+            <td>${c.nascimento}</td>
+            <td><button onclick="excluir(${i})">Excluir</button></td>
+        </tr>
+        `;
+    })
 }
-function atualizarLocalStore(){
-    localStorage.setItem("clientes",JSON.stringify(clientes));
-}
-function limparCampos(){
-    document.getElementById("cpf").value = "";
-     document.getElementById("nome").value = "";
-      document.getElementById("sobrenome").value = "";
-       document.getElementById("nascimento").value = "";
+
+function excluir(indice){
+    clientes.splice(indice,1);
+    salvarLocal();
 }

@@ -1,90 +1,91 @@
 const prisma = require("../data/prisma");
 
 const novocliente = async (req, res) => {
+
     try {
-        let cliente = req.body;
 
+        const { nome, cpf, email, cnh } = req.body;
 
-
-        if (!cliente.nome) {
-            return res.status(400).json({ erro: "nome obrigatorio" });
+        if ([nome, cpf, email, cnh].some(campo => !campo)) {
+            return res.status(400).json({
+                erro: "todos os campos são obrigatorios"
+            });
         }
 
-        let nome = cliente.nome.trim();
+        const nomeTratado = nome.trim();
+        const quantidadePalavras = nomeTratado.split(/\s+/);
 
-        if (nome.length === 0) {
-            return res.status(400).json({ erro: "nome nao pode tar vazio" });
+        if (quantidadePalavras.length < 2) {
+            return res.status(400).json({
+                erro: "nome tem q ter pelo menos 2 palavras"
+            });
         }
 
-        let palavras = nome.split(" ").filter(p => p.trim().length > 0);
+        const cpfLimpo = String(cpf).replace(/\D/g, "");
 
-        if (palavras.length < 2) {
-            return res.status(400).json({ erro: "O nome deve conter pelo menos duas palavras" });
+        if (!/^\d+$/.test(cpfLimpo)) {
+            return res.status(400).json({
+                erro: "cpf nao pd ter letra"
+            });
         }
 
-        cliente.nome = nome;
-
-
-
-        if (!cliente.cpf) {
-            return res.status(400).json({ erro: "CPF é obrigatorio" });
+        if (cpfLimpo.length !== 11) {
+            return res.status(400).json({
+                erro: "cpf tem que ter 11 caracteres"
+            });
         }
 
-        cpf = cpf.trim()
+        const emailFormatado = email.trim().toLowerCase();
 
-        if (cpf.length !== 11) {
-            return res.status(400).json({ erro: "cpf deve conter exatamente 11 números" });
+        const emailValido =
+            emailFormatado.includes("@") &&
+            emailFormatado.includes(".");
+
+        if (!emailValido) {
+            return res.status(400).json({
+                erro: "email invalido"
+            });
         }
 
-        cliente.cpf = cpf;
-
-
-
-        if (!cliente.email) {
-            return res.status(400).json({ erro: "email obrigatorio" });
-        }
-
-        let email = cliente.email.toLowerCase();
-
-        if (!email.includes("@") || !email.includes(".")) {
-            return res.status(400).json({ erro: "Email inválido" });
-        }
-
-        const clientesExistentes = await prisma.cliente.findMany();
-
-        const emailExiste = clientesExistentes.some(c => 
-            c.email === email
-        );
-
-        if (emailExiste) {
-            return res.status(400).json({ erro: "Já existe um cliente com esse email" });
-        }
-
-        cliente.email = email;
-
-
-
-        if (!cliente.cnh) {
-            return res.status(400).json({ erro: "CNH é obrigatória" });
-        }
-
-        let caracteres = cliente.cnh.split("");
-
-        let primeiroCaractere = caracteres[0];
-
-        if (isNaN(primeiroCaractere)) {
-            return res.status(400).json({ erro: "A CNH deve começar com número" });
-        }
-
-
-        const novoCliente = await prisma.cliente.create({
-            data: cliente
+        const clienteExistente = await prisma.clientes.findMany({
+            where: {
+                email: {
+                    equals: emailFormatado,
+                    mode: "insensitive"
+                }
+            }
         });
 
-        return res.status(201).json(novoCliente);
+        if (clienteExistente.length > 0) {
+            return res.status(400).json({
+                erro: "Ja existe esse email"
+            });
+        }
 
-    } catch (error) {
-        return res.status(500).json({ erro: "Erro ao cadastrar cliente" });
+        if (!/^\d/.test(cnh)) {
+            return res.status(400).json({
+                erro: "CNH deve começar com número"
+            });
+        }
+
+        const resultado = await prisma.clientes.create({
+            data: {
+                nome: nomeTratado,
+                cpf: cpfLimpo,
+                email: emailFormatado,
+                cnh: cnh
+            }
+        });
+
+        return res.status(201).json(resultado);
+
+    } catch (err) {
+
+        console.error("Erro ao registrar cliente:", err);
+
+        return res.status(500).json({
+            erro: "Erro interno"
+        });
     }
 };
 
@@ -120,7 +121,7 @@ const apagarcliente = async (req, res) => {
 const atualizarcliente = async (req, res) => {
     const { id } = req.params;
     const dados = req.body;
-     const cliente = await prisma.turmas.update({
+    const cliente = await prisma.turmas.update({
         where: { id },
         data: dados
     });

@@ -2,68 +2,72 @@ const prisma = require("../data/prisma");
 
 const novoCarro = async (req, res) => {
     try {
-        let carro = req.body;
+        const carro = req.body;
 
-        
-        if (!carro.placa) {
-            return res.status(400).json({ erro: "placa obrigatoria" });
-        }
-
-        let placa = carro.placa.trim();
-        placa = placa.toUpperCase();
-
-        if (placa.includes(" ")) {
-            return res.status(400).json({ erro: "placa nao pode ter espaço" });
-        }
-
-        if (placa.length !== 7) {
-            return res.status(400).json({ erro: "Placa deve ter exatamente 7 caracteres" });
+        let placa = carro.placa;
+        if (!placa) {
+            return res.status(401).json
+            ({ erro: "placa obrigatoria!!!" });
         }
 
         placa = placa.trim();
+        if (placa.length === 0) {
+            return res.status(401).json
+            ({ erro: "placa tem que estar preenchida!!!" });
+        }
 
-        const carrosExistentes = await prisma.carro.findMany();
+        if (placa.includes(" ")) {
+            return res.status(401).json
+            ({ erro: "placa nao pode ter espao!!!" });
+        }
 
-        const placaExiste = carrosExistentes.some(c =>
-            c.placa.toUpperCase() === placa.toUpperCase()
+        if (placa.length !== 7) {
+            return res.status(401).json
+            ({ erro: "placa deve ter 7 caracteres!!!" });
+        }
+
+        if (placa.includes("-")) {
+            return res.status(401).json
+            ({Erro: "placa nao pode ter traçoe!!!"});
+        }
+
+        placa = placa.toUpperCase();
+        const crepetido = await prisma.carros.findMany();
+
+        const prepetida = crepetido.some(c =>
+            c.placa.toUpperCase() === placa
         );
 
-        if (placaExiste) {
-            return res.status(400).json({ erro: "Já existe um carro com essa placa" });
+        if (prepetida) {
+            return res.status(401).json({ erro: "placa ja usada" });
         }
 
-        carro.placa = placa;
+        /*--------------------------------------------------------------------------------------------------*/
 
+        let maremod = carro.modelo && carro.marca;
+        maremod = maremod.trim();
+        if (maremod === "") {
+            return res.status(400).json
+            ({ erro: "marca e modelo nao pode estar fazio!!!" });
+        };
 
-        if (!carro.codigo) {
-            return res.status(400).json({ erro: "Código é obrigatório" });
-        }
+        /*-----------------------------------------------------------------------------------------------------*/
 
-        let codigo = carro.codigo.toString();
+        let ano = carro.ano;
 
-        if (codigo.length !== 4) {
-            return res.status(400).json({ erro: "Deve ter exatamente 4 dígitos" });
-        }
+        if ((ano + "").length !== 4) {
+            return res.status(401).json
+            ({ erro: "ano deve ter 4 caracteres" });
+        };
 
-        let temLetra = codigo
-            .split("")
-            .some(caractere => isNaN(caractere));
-
-        if (temLetra) {
-            return res.status(400).json({ erro: "Não pode conter letras" });
-        }
-
-        carro.codigo = codigo;
-
-
-        const novoCarro = await prisma.carro.create({
+        const ncarro = await prisma.carros.create({
             data: carro
         });
-
-        return res.status(201).json(novoCarro);
+        return res.status(201).json(ncarro);
 
     } catch (error) {
-        return res.status(500).json({ erro: "Erro ao cadastrar carro" });
+        console.error(error);
+        return res.status(500).json({ erro: "Erro" });
     }
 };
 
