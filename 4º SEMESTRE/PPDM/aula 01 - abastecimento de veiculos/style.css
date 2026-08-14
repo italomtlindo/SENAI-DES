@@ -1,0 +1,313 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    background: #eeeeee;
+    color: #222;
+}
+
+button {
+    cursor: pointer;
+}
+
+.tela {
+    min-height: 100vh;
+}
+
+.escondido {
+    display: none !important;
+}
+
+#inicio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.caixa-inicio {
+    background: white;
+    width: 380px;
+    height: 600px;
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px #999;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.icone {
+    font-size: 60px;
+    margin-bottom: 40px;
+}
+
+.tema {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.caixa-inicio button {
+    width: 130px;
+    padding: 12px;
+
+    background: white;
+
+    border: 1px solid #777;
+    border-radius: 6px;
+}
+
+#principal {
+    padding: 20px;
+}
+
+.caixa {
+    background: white;
+
+    max-width: 650px;
+    min-height: 90vh;
+
+    margin: auto;
+
+    border-radius: 10px;
+
+    box-shadow: 0 2px 8px #999;
+
+    overflow: hidden;
+}
+
+header {
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 15px;
+
+    border-bottom: 2px solid #222;
+}
+
+header h1 {
+    font-size: 21px;
+}
+
+header button {
+    background: white;
+
+    border: none;
+
+    font-size: 30px;
+}
+
+.medias {
+    display: flex;
+
+    gap: 10px;
+
+    padding: 15px;
+}
+
+.medias div {
+    width: 50%;
+
+    border: 1px solid #ccc;
+
+    padding: 12px;
+
+    border-radius: 6px;
+
+    text-align: center;
+}
+
+.medias p {
+    color: #666;
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+.item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 15px;
+
+    border-bottom: 1px solid #ccc;
+
+    cursor: pointer;
+}
+
+.item:hover {
+    background: #f5f5f5;
+}
+
+.item p {
+    color: #666;
+
+    margin-top: 4px;
+
+    font-size: 14px;
+}
+
+.item button {
+    border: none;
+
+    background: white;
+
+    font-size: 30px;
+}
+
+.vazio {
+    text-align: center;
+
+    color: #777;
+
+    padding: 30px;
+}
+
+.modal {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: #0008;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 20px;
+}
+
+.formulario {
+    background: white;
+
+    width: 100%;
+
+    max-width: 400px;
+
+    padding: 25px;
+
+    border-radius: 8px;
+}
+
+.formulario h2 {
+    margin-bottom: 20px;
+}
+
+.formulario label {
+    display: block;
+
+    margin-top: 12px;
+
+    margin-bottom: 5px;
+}
+
+.formulario input,
+.formulario select {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #aaa;
+
+    border-radius: 5px;
+}
+
+.formulario button {
+    width: 100%;
+
+    padding: 11px;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #222;
+
+    color: white;
+}
+
+.formulario .cancelar {
+    background: #aaa;
+
+    margin-top: 8px;
+}
+
+body.escuro {
+    background: #181818;
+
+    color: white;
+}
+
+body.escuro .caixa-inicio,
+body.escuro .caixa,
+body.escuro .formulario {
+    background: #252525;
+}
+
+body.escuro header {
+    border-color: white;
+}
+
+body.escuro header button,
+body.escuro .caixa-inicio button,
+body.escuro .item button {
+    background: #252525;
+
+    color: white;
+}
+
+body.escuro .medias div {
+    border-color: #555;
+}
+
+body.escuro .item {
+    border-color: #555;
+}
+
+body.escuro .item p,
+body.escuro .medias p,
+body.escuro .vazio {
+    color: #bbb;
+}
+
+@media (max-width: 600px) {
+
+    #principal {
+        padding: 0;
+    }
+
+    .caixa {
+        min-height: 100vh;
+
+        border-radius: 0;
+    }
+
+    .caixa-inicio {
+        width: 90%;
+    }
+
+    .medias {
+        flex-direction: column;
+    }
+
+    .medias div {
+        width: 100%;
+    }
+}

@@ -3,23 +3,19 @@ const express = require('express');
 const cors = require("cors");
 
 const app = express();
+
 app.use(express.json());
 app.use(cors());
 
-const incricoesRoutes = require('./src/routes/incricoes.routes');
+app.use("/uploads", express.static("uploads"));
 
-app.use('/incricoes', incricoesRoutes);
-
-
+const inscricoesRoutes = require('./src/routes/incricoes.routes');
 const eventosRoutes = require('./src/routes/eventos.routes');
-
-app.use('/eventos', eventosRoutes);
-
-
 const usuariosRoutes = require('./src/routes/usuarios.routes');
 
+app.use('/inscricoes', inscricoesRoutes);
+app.use('/eventos', eventosRoutes);
 app.use('/usuarios', usuariosRoutes);
-
 
 const PORT = process.env.PORT || 3000;
 
