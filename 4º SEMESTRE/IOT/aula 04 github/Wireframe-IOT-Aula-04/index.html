@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard do Portão</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>Dashboard de entradas e saídas da empresa</h1>
+            <p>Histórico do portão - Maio de 2026</p>
+        </header>
+
+        <main>
+
+            <section class="card">
+                <h2>Diariamente</h2>
+
+                <div class="grafico">
+                    <canvas id="graficoDiario"></canvas>
+                </div>
+            </section>
+
+
+            <section class="card">
+                <h2>Semanalmente</h2>
+
+                <div class="grafico semanal">
+                    <canvas id="graficoSemanal"></canvas>
+                </div>
+            </section>
+
+
+            <section class="card">
+
+                <h2>Registro de Dados</h2>
+
+                <div class="tabela-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Hora</th>
+                                <th>Semana</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabelaDados"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer>
+            Dashboard IoT - Controle do Portão
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+body {
+    font-family: Arial, sans-serif; /*Define qual fonte o texto vai usar.*/
+    text-align: center; /*Coloca o texto no centro.*/
+    padding-top: 200px; /*Cria um espaço de 200px na parte de cima*/
+    transition: 0.5s;
+}
+
+button {
+    padding: 15px 25px; /*Cria espaço dentro do botão*/
+    font-size: 18px;    /*Define o tamanho do texto*/
+    cursor: pointer;    /*transforma o cursor em uma maozinha quando passar pelo botao*/
+    border: none;   /*Remove a borda do botão*/
+    border-radius: 8px; /*Arredonda os cantos do botão*/
+}

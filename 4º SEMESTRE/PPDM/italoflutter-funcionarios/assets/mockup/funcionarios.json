@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "nome": "Mariana Souza",
+    "cargo": "Atendente",
+    "salario": 1850.50,
+    "dataContratacao": "2022-03-15",
+    "avatar": "https://i.pravatar.cc/150?img=47"
+  },
+  {
+    "id": 2,
+    "nome": "Carlos Pereira",
+    "cargo": "Lavador",
+    "salario": 2100.00,
+    "dataContratacao": "2021-11-02",
+    "avatar": "https://i.pravatar.cc/150?img=12"
+  },
+  {
+    "id": 3,
+    "nome": "Fernanda Lima",
+    "cargo": "Passadeira",
+    "salario": 1950.75,
+    "dataContratacao": "2023-01-20",
+    "avatar": "https://i.pravatar.cc/150?img=49"
+  },
+  {
+    "id": 4,
+    "nome": "João Batista",
+    "cargo": "Gerente",
+    "salario": 3500.00,
+    "dataContratacao": "2020-08-10",
+    "avatar": "https://i.pravatar.cc/150?img=68"
+  },
+  {
+    "id": 5,
+    "nome": "Aline Rocha",
+    "cargo": "Auxiliar de Lavanderia",
+    "salario": 1700.00,
+    "dataContratacao": "2024-02-05",
+    "avatar": "https://i.pravatar.cc/150?img=45"
+  },
+  {
+    "id": 6,
+    "nome": "Ricardo Alves",
+    "cargo": "Motorista",
+    "salario": 2200.30,
+    "dataContratacao": "2022-07-18",
+    "avatar": "https://i.pravatar.cc/150?img=15"
+  },
+  {
+    "id": 7,
+    "nome": "Patrícia Gomes",
+    "cargo": "Atendente",
+    "salario": 1820.00,
+    "dataContratacao": "2023-06-12",
+    "avatar": "https://i.pravatar.cc/150?img=44"
+  },
+  {
+    "id": 8,
+    "nome": "Eduardo Martins",
+    "cargo": "Técnico de Manutenção",
+    "salario": 2800.90,
+    "dataContratacao": "2021-04-25",
+    "avatar": "https://i.pravatar.cc/150?img=53"
+  },
+  {
+    "id": 9,
+    "nome": "Juliana Freitas",
+    "cargo": "Passadeira",
+    "salario": 2000.00,
+    "dataContratacao": "2022-09-30",
+    "avatar": "https://i.pravatar.cc/150?img=41"
+  },
+  {
+    "id": 10,
+    "nome": "Lucas Ribeiro",
+    "cargo": "Auxiliar de Lavanderia",
+    "salario": 1750.60,
+    "dataContratacao": "2024-05-14",
+    "avatar": "https://i.pravatar.cc/150?img=33"
+  }
+]
